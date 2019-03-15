@@ -1,0 +1,22 @@
+{
+  "name": "notes",
+  "version": "0.0.1",
+  "description": "Add, edit, and delete notes.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx babel --watch src --out-dir ./public --presets react-app/prod | node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "react"
+  ],
+  "author": "Attila Buturla",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2",
+    "express": "^4.16.4",
+    "lowdb": "^1.0.0"
+  }
+}
