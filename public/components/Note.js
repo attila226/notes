@@ -39,12 +39,20 @@ var Note = function (_React$Component) {
             return React.createElement(
                 "form",
                 { onSubmit: this.handleSubmit },
-                React.createElement("input", { name: "title", value: this.state.title, onChange: this.handleChange }),
-                React.createElement("textarea", { name: "text", value: this.state.text, onChange: this.handleChange }),
                 React.createElement(
-                    "button",
-                    { type: "submit" },
-                    "save"
+                    "div",
+                    {
+                        style: {
+                            display: "flex",
+                            justifyContent: "center"
+                        } },
+                    React.createElement("input", { name: "title", value: this.state.title, onChange: this.handleChange }),
+                    React.createElement("textarea", { name: "text", value: this.state.text, onChange: this.handleChange }),
+                    React.createElement(
+                        "button",
+                        { type: "submit" },
+                        "save"
+                    )
                 )
             );
         }

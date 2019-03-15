@@ -40,9 +40,11 @@ var NoteList = function (_React$Component) {
 
             fetch(url, {
                 method: 'PUT',
-                body: Object.assign({}, data, {
-                    id: id
-                })
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: data
             }).then(function (response) {
                 return console.log('saved');
             });

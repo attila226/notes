@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const noteApi = require('./api/note');
 
+app.use(express.json());
+
 app.listen(8080, () => {
     console.log('App running on port 8080');
 });
@@ -12,14 +14,17 @@ app.get('/', (req, res) => {
 
 //End points
 app.get('/notes', (req, res) => {
-    const data = noteApi.getAll();
+    const notes = noteApi.getAll();
 
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(data));
+    res.end(JSON.stringify(notes));
 });
 
 app.get('/notes/:id', (req, res) => {
-    res.send('Get note ' + req.params.id);
+    const note = noteApi.get(req.params.id);
+
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(note));
 });
 
 app.post('/notes/', (req, res) => {
@@ -27,7 +32,9 @@ app.post('/notes/', (req, res) => {
 });
 
 app.put('/notes/:id', (req, res) => {
-    noteApi.update(req.params.id);
+    const note = req.body;
+
+    noteApi.update(req.params.id, note);
     res.statusCode = 204;
     res.send();
 });

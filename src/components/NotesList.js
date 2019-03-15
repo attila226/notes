@@ -21,10 +21,11 @@ class NoteList extends React.Component {
 
         fetch(url, {
             method: 'PUT',
-            body: {
-                ...data,
-                id
-            }
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: data
         }).then(response => console.log('saved'));
     }
 

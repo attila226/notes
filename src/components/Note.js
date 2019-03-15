@@ -20,9 +20,16 @@ class Note extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <input name="title" value={this.state.title} onChange={this.handleChange}/>
-                <textarea name="text" value={this.state.text} onChange={this.handleChange}/>
-                <button type="submit">save</button>
+                <div
+                    style={{
+                    display: "flex",
+                    justifyContent: "center"
+                }}>
+
+                    <input name="title" value={this.state.title} onChange={this.handleChange}/>
+                    <textarea name="text" value={this.state.text} onChange={this.handleChange}/>
+                    <button type="submit">save</button>
+                </div>
             </form>
         );
     }
