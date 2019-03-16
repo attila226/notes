@@ -23,11 +23,13 @@ var Note = function (_React$Component) {
         }
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Note.__proto__ || Object.getPrototypeOf(Note)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-            title: _this.props.note.title,
-            text: _this.props.note.text
+            title: _this.props.note ? _this.props.note.title : '',
+            text: _this.props.note ? _this.props.note.text : ''
         }, _this.handleSubmit = function (event) {
             event.preventDefault();
-            _this.props.save(JSON.stringify(_this.state), _this.props.note.id);
+            var id = _this.props.note ? _this.props.note.id : null;
+
+            _this.props.save(JSON.stringify(_this.state), id);
         }, _this.handleChange = function (event) {
             _this.setState(_defineProperty({}, event.target.name, event.target.value));
         }, _this.buttonStyle = {
@@ -35,7 +37,8 @@ var Note = function (_React$Component) {
             border: 'none',
             color: 'white',
             borderRadius: '12px',
-            fontSize: '16px'
+            fontSize: '16px',
+            width: '100px'
         }, _this.textareaStyle = {
             margin: "0 1rem",
             boxSizing: "border-box",
@@ -65,7 +68,7 @@ var Note = function (_React$Component) {
                     React.createElement(
                         'button',
                         { type: 'submit', style: this.buttonStyle },
-                        'Save'
+                        this.props.buttonText
                     )
                 )
             );

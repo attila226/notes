@@ -1,5 +1,6 @@
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
+const uuidv4 = require('uuid/v4');
 
 const adapter = new FileSync('db.json');
 const db = low(adapter);
@@ -43,18 +44,33 @@ module.exports = {
             .find({id: Number(id)})
             .value();
 
-            return note;
+        return note;
     },
 
     update: function (id, note) {
-        console.log(`Updating record ${id}`, note);
-
         db
             .get('notes')
             .find({id: Number(id)})
             .assign(note)
             .write();
+
+        console.log(`Updated record ${id}`, note);
     },
 
-    add: function (note) {}
+    add: function (note) {
+        const id = uuidv4();
+        const newNote = {
+            id,
+            ...note
+        }
+
+        db
+            .get('notes')
+            .push(newNote)
+            .write()
+
+        console.log('Added note ', newNote);
+
+        return newNote;
+    }
 }

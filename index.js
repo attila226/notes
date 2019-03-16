@@ -27,8 +27,12 @@ app.get('/notes/:id', (req, res) => {
     res.end(JSON.stringify(note));
 });
 
-app.post('/notes/', (req, res) => {
-    res.send('Add note');
+app.post('/notes', (req, res) => {
+    const note = req.body;
+    const updateNote = noteApi.add(note);
+
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(updateNote));
 });
 
 app.put('/notes/:id', (req, res) => {

@@ -1,14 +1,22 @@
 class Note extends React.Component {
     state = {
-        title: this.props.note.title,
-        text: this.props.note.text
+        title: (this.props.note)
+            ? this.props.note.title
+            : '',
+        text: (this.props.note)
+            ? this.props.note.text
+            : ''
     };
 
     handleSubmit = event => {
         event.preventDefault();
+        const id = (this.props.note)
+            ? this.props.note.id
+            : null;
+
         this
             .props
-            .save(JSON.stringify(this.state), this.props.note.id);
+            .save(JSON.stringify(this.state), id);
     };
 
     handleChange = event => {
@@ -22,7 +30,8 @@ class Note extends React.Component {
         border: 'none',
         color: 'white',
         borderRadius: '12px',
-        fontSize: '16px'
+        fontSize: '16px',
+        width: '100px'
     };
 
     textareaStyle = {
@@ -47,7 +56,7 @@ class Note extends React.Component {
                         style={this.textareaStyle}
                         value={this.state.text}
                         onChange={this.handleChange}/>
-                    <button type="submit" style={this.buttonStyle}>Save</button>
+                    <button type="submit" style={this.buttonStyle}>{this.props.buttonText}</button>
                 </div>
             </form>
         );

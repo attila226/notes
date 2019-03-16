@@ -17,6 +17,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",
     "express": "^4.16.4",
-    "lowdb": "^1.0.0"
+    "lowdb": "^1.0.0",
+    "uuid": "^3.3.2"
   }
 }

@@ -9,16 +9,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var NoteList = function (_React$Component) {
     _inherits(NoteList, _React$Component);
 
-    function NoteList(props) {
+    function NoteList() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, NoteList);
 
-        var _this = _possibleConstructorReturn(this, (NoteList.__proto__ || Object.getPrototypeOf(NoteList)).call(this, props));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
 
-        _this.state = {
-            loading: true,
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = NoteList.__proto__ || Object.getPrototypeOf(NoteList)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
             notes: []
-        };
-        return _this;
+        }, _this.titleStyle = {
+            textAlign: 'center',
+            maring: '5px'
+        }, _this.buttonStyle = {
+            backgroundColor: '#4CAF50',
+            border: 'none',
+            color: 'white',
+            borderRadius: '12px',
+            fontSize: '16px'
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(NoteList, [{
@@ -28,14 +41,14 @@ var NoteList = function (_React$Component) {
 
             var url = "//localhost:8080/notes";
             var response = fetch(url).then(function (response) {
-                response.json().then(function (data) {
-                    return _this2.setState({ notes: data });
+                response.json().then(function (notes) {
+                    return _this2.setState({ notes: notes });
                 });
             });
         }
     }, {
         key: 'updateNote',
-        value: function updateNote(data, id) {
+        value: function updateNote(note, id) {
             var url = '//localhost:8080/notes/' + id;
 
             fetch(url, {
@@ -44,22 +57,54 @@ var NoteList = function (_React$Component) {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: data
+                body: note
             }).then(function (response) {
-                return console.log('saved');
+                console.log('Updated');
+            });
+        }
+    }, {
+        key: 'addNote',
+        value: function addNote(note) {
+            var _this3 = this;
+
+            var url = '//localhost:8080/notes';
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: note
+            }).then(function (response) {
+                response.json().then(function (updatedNote) {
+                    console.log('Added', updatedNote, _this3.state);
+                    /*
+                    this.setState([
+                        ...this.state.notes,
+                        updatedNote
+                    ]);
+                    */
+                });
             });
         }
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
+            var _this4 = this;
 
             return React.createElement(
                 'div',
                 null,
+                React.createElement(
+                    'h2',
+                    { style: this.titleStyle },
+                    'Notes'
+                ),
                 this.state.notes.map(function (note) {
-                    return React.createElement(Note, { key: note.id, save: _this3.updateNote, note: note });
-                })
+                    return React.createElement(Note, { key: note.id, save: _this4.updateNote, note: note, buttonText: 'Update' });
+                }),
+                React.createElement(Note, { save: this.addNote, buttonText: 'Add' })
             );
         }
     }]);
