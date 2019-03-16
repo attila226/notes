@@ -1,7 +1,19 @@
 class NoteList extends React.Component {
     state = {
-        notes: []
+        notes: [],
+        newNote: {
+            text: '',
+            title: ''
+        }
     };
+
+    constructor(props) {
+        super(props);
+
+        this.addNote = this
+            .addNote
+            .bind(this);
+    }
 
     componentDidMount() {
         const url = "//localhost:8080/notes";
@@ -41,13 +53,13 @@ class NoteList extends React.Component {
             response
                 .json()
                 .then(updatedNote => {
-                    console.log('Added', updatedNote, this.state);
-                    /*
-                    this.setState([
-                        ...this.state.notes,
-                        updatedNote
-                    ]);
-                    */
+                    this.setState({
+                        notes: [
+                            ...this.state.notes,
+                            updatedNote
+                        ],
+                        newNote: {}
+                    }, () => console.log('Added', updatedNote, this.state));
                 });
         });
     }
@@ -74,7 +86,7 @@ class NoteList extends React.Component {
                     .notes
                     .map(note => (<Note key={note.id} save={this.updateNote} note={note} buttonText="Update"/>))}
 
-                <Note save={this.addNote} buttonText="Add"/>
+                <Note save={this.addNote} buttonText="Add" note={this.state.newNote}/>
 
             </div>
         );
