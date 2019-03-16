@@ -2,4 +2,6 @@
 
 /public/**.js
 
+db.json
+
 .DS_Store

@@ -17,11 +17,7 @@ var NoteList = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (NoteList.__proto__ || Object.getPrototypeOf(NoteList)).call(this, props));
 
         _this.state = {
-            notes: [],
-            newNote: {
-                text: '',
-                title: ''
-            }
+            notes: []
         };
         _this.titleStyle = {
             textAlign: 'center',
@@ -85,10 +81,9 @@ var NoteList = function (_React$Component) {
             }).then(function (response) {
                 response.json().then(function (updatedNote) {
                     _this3.setState({
-                        notes: [].concat(_toConsumableArray(_this3.state.notes), [updatedNote]),
-                        newNote: {}
+                        notes: [].concat(_toConsumableArray(_this3.state.notes), [updatedNote])
                     }, function () {
-                        return console.log('Added', updatedNote, _this3.state);
+                        return console.log('Added', updatedNote);
                     });
                 });
             });
@@ -109,7 +104,7 @@ var NoteList = function (_React$Component) {
                 this.state.notes.map(function (note) {
                     return React.createElement(Note, { key: note.id, save: _this4.updateNote, note: note, buttonText: 'Update' });
                 }),
-                React.createElement(Note, { save: this.addNote, buttonText: 'Add', note: this.state.newNote })
+                React.createElement(Note, { save: this.addNote, buttonText: 'Add' })
             );
         }
     }]);

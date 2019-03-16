@@ -1,10 +1,6 @@
 class NoteList extends React.Component {
     state = {
-        notes: [],
-        newNote: {
-            text: '',
-            title: ''
-        }
+        notes: []
     };
 
     constructor(props) {
@@ -57,9 +53,8 @@ class NoteList extends React.Component {
                         notes: [
                             ...this.state.notes,
                             updatedNote
-                        ],
-                        newNote: {}
-                    }, () => console.log('Added', updatedNote, this.state));
+                        ]
+                    }, () => console.log('Added', updatedNote));
                 });
         });
     }
@@ -86,8 +81,7 @@ class NoteList extends React.Component {
                     .notes
                     .map(note => (<Note key={note.id} save={this.updateNote} note={note} buttonText="Update"/>))}
 
-                <Note save={this.addNote} buttonText="Add" note={this.state.newNote}/>
-
+                <Note save={this.addNote} buttonText="Add"/>
             </div>
         );
     }

@@ -17,6 +17,8 @@ class Note extends React.Component {
         this
             .props
             .save(JSON.stringify(this.state), id);
+
+        this.setState({title: '', text: ''});
     };
 
     handleChange = event => {

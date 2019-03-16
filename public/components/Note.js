@@ -30,6 +30,8 @@ var Note = function (_React$Component) {
             var id = _this.props.note ? _this.props.note.id : null;
 
             _this.props.save(JSON.stringify(_this.state), id);
+
+            _this.setState({ title: '', text: '' });
         }, _this.handleChange = function (event) {
             _this.setState(_defineProperty({}, event.target.name, event.target.value));
         }, _this.buttonStyle = {
