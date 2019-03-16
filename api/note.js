@@ -31,7 +31,10 @@ module.exports = {
             .value();
 
         if (!notes) {
-            const defaultData = this.init();
+            const defaultData = this
+                .init()
+                .notes;
+
             return defaultData;
         }
 
