@@ -17,18 +17,37 @@ class Note extends React.Component {
         });
     };
 
+    buttonStyle = {
+        backgroundColor: '#4CAF50',
+        border: 'none',
+        color: 'white',
+        borderRadius: '12px',
+        fontSize: '16px'
+    };
+
+    textareaStyle = {
+        margin: "0 1rem",
+        boxSizing: "border-box",
+        width: "70%"
+    };
+
+    divStyle = {
+        display: "flex",
+        justifyContent: "center",
+        margin: "5px"
+    };
+
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <div
-                    style={{
-                    display: "flex",
-                    justifyContent: "center"
-                }}>
-
+                <div style={this.divStyle}>
                     <input name="title" value={this.state.title} onChange={this.handleChange}/>
-                    <textarea name="text" value={this.state.text} onChange={this.handleChange}/>
-                    <button type="submit">save</button>
+                    <textarea
+                        name="text"
+                        style={this.textareaStyle}
+                        value={this.state.text}
+                        onChange={this.handleChange}/>
+                    <button type="submit" style={this.buttonStyle}>Save</button>
                 </div>
             </form>
         );

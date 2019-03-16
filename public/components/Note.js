@@ -30,28 +30,42 @@ var Note = function (_React$Component) {
             _this.props.save(JSON.stringify(_this.state), _this.props.note.id);
         }, _this.handleChange = function (event) {
             _this.setState(_defineProperty({}, event.target.name, event.target.value));
+        }, _this.buttonStyle = {
+            backgroundColor: '#4CAF50',
+            border: 'none',
+            color: 'white',
+            borderRadius: '12px',
+            fontSize: '16px'
+        }, _this.textareaStyle = {
+            margin: "0 1rem",
+            boxSizing: "border-box",
+            width: "70%"
+        }, _this.divStyle = {
+            display: "flex",
+            justifyContent: "center",
+            margin: "5px"
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(Note, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "form",
+                'form',
                 { onSubmit: this.handleSubmit },
                 React.createElement(
-                    "div",
-                    {
-                        style: {
-                            display: "flex",
-                            justifyContent: "center"
-                        } },
-                    React.createElement("input", { name: "title", value: this.state.title, onChange: this.handleChange }),
-                    React.createElement("textarea", { name: "text", value: this.state.text, onChange: this.handleChange }),
+                    'div',
+                    { style: this.divStyle },
+                    React.createElement('input', { name: 'title', value: this.state.title, onChange: this.handleChange }),
+                    React.createElement('textarea', {
+                        name: 'text',
+                        style: this.textareaStyle,
+                        value: this.state.text,
+                        onChange: this.handleChange }),
                     React.createElement(
-                        "button",
-                        { type: "submit" },
-                        "save"
+                        'button',
+                        { type: 'submit', style: this.buttonStyle },
+                        'Save'
                     )
                 )
             );
