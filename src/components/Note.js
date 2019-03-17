@@ -5,8 +5,33 @@ class Note extends React.Component {
             : '',
         text: (this.props.note)
             ? this.props.note.text
-            : ''
+            : '',
+        titleError: '',
+        noteError: ''
     };
+
+    validate() {
+        let isValid = true;
+        let titleError = '';
+        let noteError = '';
+
+        if (!this.state.title) {
+            isValid = false;
+            titleError = 'Title is required.';
+        }
+
+        if (!this.state.text) {
+            isValid = false;
+            noteError = 'Note text is required.';
+        }
+
+        if (titleError || noteError) {
+            this.setState({titleError, noteError});
+            return false;
+        }
+
+        return isValid;
+    }
 
     handleSubmit = event => {
         event.preventDefault();
@@ -14,11 +39,15 @@ class Note extends React.Component {
             ? this.props.note.id
             : null;
 
-        this
-            .props
-            .save(JSON.stringify(this.state), id);
+        const isValid = this.validate();
 
-        this.setState({title: '', text: ''});
+        if (isValid) {
+            this
+                .props
+                .save(JSON.stringify(this.state), id);
+
+            this.setState({title: '', text: '', titleError: '', noteError: ''});
+        }
     };
 
     handleChange = event => {
@@ -37,28 +66,45 @@ class Note extends React.Component {
     };
 
     textareaStyle = {
-        margin: "0 1rem",
-        boxSizing: "border-box",
-        width: "70%"
+        width: '100%'
     };
 
-    divStyle = {
-        display: "flex",
-        justifyContent: "center",
-        margin: "5px"
+    errorStyle = {
+        fontSize: 12,
+        color: 'red'
     };
+
+    gridContainer = {
+        display: 'grid',
+        gridTemplateColumns: 'auto 70% auto',
+        justifyContent: 'center',
+        rowGap: '5px',
+        columnGap: '15px'
+    }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <div style={this.divStyle}>
+                <div style={this.gridContainer}>
+
                     <input name="title" value={this.state.title} onChange={this.handleChange}/>
+
                     <textarea
                         name="text"
                         style={this.textareaStyle}
                         value={this.state.text}
                         onChange={this.handleChange}/>
+
                     <button type="submit" style={this.buttonStyle}>{this.props.buttonText}</button>
+
+                    <div style={this.errorStyle}>
+                        {this.state.titleError}
+                    </div>
+
+                    <div style={this.errorStyle}>
+                        {this.state.noteError}
+                    </div>
+
                 </div>
             </form>
         );
