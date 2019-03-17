@@ -12,6 +12,10 @@ app.get('/', (req, res) => {
     res.sendFile('public/index.html', {root: __dirname})
 });
 
+app.get('**.**', (req, res) => {
+    res.sendFile(`public${req.url}`, {root: __dirname})
+});
+
 //End points
 app.get('/notes', (req, res) => {
     const notes = noteApi.getAll();
@@ -42,17 +46,3 @@ app.put('/notes/:id', (req, res) => {
     res.statusCode = 204;
     res.send();
 });
-
-//TODO: Make this more dyanmic
-app.get('/app.js', (req, res) => {
-    res.sendFile('public/app.js', {root: __dirname})
-});
-
-app.get('/Note.js', (req, res) => {
-    res.sendFile('public/components/Note.js', {root: __dirname})
-});
-
-app.get('/NotesList.js', (req, res) => {
-    res.sendFile('public/components/NotesList.js', {root: __dirname})
-});
-//END TODO
