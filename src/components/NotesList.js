@@ -12,7 +12,7 @@ class NoteList extends React.Component {
     }
 
     componentDidMount() {
-        const url = "//localhost:8080/notes";
+        const url = "//localhost:8080/api/notes";
         const response = fetch(url).then(response => {
             response
                 .json()
@@ -21,7 +21,7 @@ class NoteList extends React.Component {
     }
 
     updateNote(note, id) {
-        const url = `//localhost:8080/notes/${id}`;
+        const url = `//localhost:8080/api/notes/${id}`;
 
         fetch(url, {
             method: 'PUT',
@@ -36,7 +36,7 @@ class NoteList extends React.Component {
     }
 
     addNote(note) {
-        const url = `//localhost:8080/notes`;
+        const url = `//localhost:8080/api/notes`;
 
         fetch(url, {
             method: 'POST',

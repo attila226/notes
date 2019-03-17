@@ -16,22 +16,26 @@ app.get('**.**', (req, res) => {
     res.sendFile(`public${req.url}`, {root: __dirname})
 });
 
+app.get('/note:id', (req, res) => {
+    res.sendFile('public/index.html', {root: __dirname})
+});
+
 //End points
-app.get('/notes', (req, res) => {
+app.get('/api/notes', (req, res) => {
     const notes = noteApi.getAll();
 
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(notes));
 });
 
-app.get('/notes/:id', (req, res) => {
+app.get('/api/notes/:id', (req, res) => {
     const note = noteApi.get(req.params.id);
 
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(note));
 });
 
-app.post('/notes', (req, res) => {
+app.post('/api/notes', (req, res) => {
     const note = req.body;
     const updateNote = noteApi.add(note);
 
@@ -39,7 +43,7 @@ app.post('/notes', (req, res) => {
     res.end(JSON.stringify(updateNote));
 });
 
-app.put('/notes/:id', (req, res) => {
+app.put('/api/notes/:id', (req, res) => {
     const note = req.body;
 
     noteApi.update(req.params.id, note);

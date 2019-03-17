@@ -42,11 +42,21 @@ class Note extends React.Component {
         const isValid = this.validate();
 
         if (isValid) {
+            let note = {
+                title: this.state.title,
+                text: this.state.text
+            }
+
             this
                 .props
-                .save(JSON.stringify(this.state), id);
+                .save(JSON.stringify(note), id);
 
-            this.setState({title: '', text: '', titleError: '', noteError: ''});
+            if (!id) {
+                this.setState({title: '', text: '', titleError: '', noteError: ''});
+            } else {
+                this.setState({titleError: '', noteError: ''});
+            }
+
         }
     };
 
