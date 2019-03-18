@@ -7,11 +7,11 @@ const db = low(adapter);
 
 const testData = [
     {
-        id: 1,
+        id: "1",
         title: 'A Tale of Two Cities',
         text: "It was the best of times, it was the blurst of times."
     }, {
-        id: 2,
+        id: "2",
         title: 'The Sound of Silence',
         text: "Hello darkness, my old friend. I've come to talk with you again."
     }

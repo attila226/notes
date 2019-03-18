@@ -88,7 +88,6 @@ class Note extends React.Component {
         display: 'grid',
         gridTemplateColumns: 'auto 70% auto',
         justifyContent: 'center',
-        rowGap: '5px',
         columnGap: '15px'
     }
 

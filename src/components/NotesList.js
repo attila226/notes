@@ -15,8 +15,8 @@ class NoteList extends React.Component {
     componentDidMount() {
         const pathName = window.location.pathname;
 
-        if (pathName.includes('/notes')) {
-            let highlightedNote = pathName.split('/notes')[1];
+        if (pathName.includes('/note')) {
+            let highlightedNote = pathName.split('/note')[1];
 
             this.setState({highlightedNote});
         }
