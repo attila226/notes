@@ -10,7 +10,7 @@ Simple application to view and edit notes
 
     npm start
 
-This will run both the server and serve the website. The website utilizes transpilation with Babel on start-up. (JavaScript files are copied from `src` to  `public`.)   
+This will run both the server and serve the website. The website utilizes transpilation with Babel on start-up. (JavaScript files are copied from `src` to `public`.)
 
 ## Test
 
@@ -22,9 +22,9 @@ This will run both the server and serve the website. The website utilizes transp
 
 `api` Server side API logic.
 
-`src` Client side source files. By default running  `npm run` will cause the JavaScript files in this directory to be transpiled and output to the `public` folder.
+`src` Client side source files. By default running `npm run` will cause the JavaScript files in this directory to be transpiled and output to the `public` folder.
 
-`public` The website files. The website is a single page application, with `index.html` being the entry point.
+`public` The website files. The website is a single page application, with `index.html` being the entry point. Do not edit JavaScript files in this folder, but in `src` instead.
 
 ### Additional Notes
 
