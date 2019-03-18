@@ -1,6 +1,7 @@
 class NoteList extends React.Component {
     state = {
-        notes: []
+        notes: [],
+        highlightedNote: ''
     };
 
     constructor(props) {
@@ -12,6 +13,14 @@ class NoteList extends React.Component {
     }
 
     componentDidMount() {
+        const pathName = window.location.pathname;
+
+        if (pathName.includes('/notes')) {
+            let highlightedNote = pathName.split('/notes')[1];
+
+            this.setState({highlightedNote});
+        }
+
         const url = "//localhost:8080/api/notes";
         const response = fetch(url).then(response => {
             response
@@ -79,7 +88,17 @@ class NoteList extends React.Component {
                 {this
                     .state
                     .notes
-                    .map(note => (<Note key={note.id} save={this.updateNote} note={note} buttonText="Update"/>))}
+                    .map((note) => {
+                        let noteStyle = {};
+                        if (note.id === this.state.highlightedNote) {
+                            noteStyle.backgroundColor = 'whitesmoke';
+                        }
+
+                        return (
+                            <div style={noteStyle}><Note key={note.id} save={this.updateNote} note={note} buttonText="Update"/></div>
+                        );
+
+                    })}
 
                 <Note save={this.addNote} buttonText="Add"/>
             </div>
