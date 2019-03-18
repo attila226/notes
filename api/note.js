@@ -44,7 +44,7 @@ module.exports = {
     get: function (id) {
         const note = db
             .get('notes')
-            .find({id: Number(id)})
+            .find({id})
             .value();
 
         return note;
@@ -53,7 +53,7 @@ module.exports = {
     update: function (id, note) {
         db
             .get('notes')
-            .find({id: Number(id)})
+            .find({id})
             .assign(note)
             .write();
 
