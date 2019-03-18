@@ -2,19 +2,13 @@ const express = require('express');
 const app = express();
 const noteApi = require('./api/note');
 
-app.use(express.json());
-
 app.listen(8080, () => {
     console.log('App running on port 8080');
 });
 
-app.get('/', (req, res) => {
-    res.sendFile('public/index.html', {root: __dirname})
-});
+app.use(express.json());
 
-app.get('**.**', (req, res) => {
-    res.sendFile(`public${req.url}`, {root: __dirname})
-});
+app.use(express.static('public'));
 
 app.get('/note:id', (req, res) => {
     res.sendFile('public/index.html', {root: __dirname})
