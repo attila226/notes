@@ -95,7 +95,7 @@ class NoteList extends React.Component {
                         }
 
                         return (
-                            <div style={noteStyle}><Note key={note.id} save={this.updateNote} note={note} buttonText="Update"/></div>
+                            <div key={note.id} style={noteStyle}><Note save={this.updateNote} note={note} buttonText="Update"/></div>
                         );
 
                     })}
