@@ -18,7 +18,7 @@ This will run both the server and serve the website. The website utilizes transp
 
 ## Folder Structure
 
-`index.js` Entry point for service.
+`server.js` Entry point for service.
 
 `api` Server side API logic.
 

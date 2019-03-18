@@ -4,7 +4,7 @@
   "description": "Add, edit, and delete notes.",
   "main": "index.js",
   "scripts": {
-    "start": "npx babel --watch src --out-dir ./public --presets react-app/prod | node index.js",
+    "start": "npx babel --watch src --out-dir ./public --presets react-app/prod | node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
