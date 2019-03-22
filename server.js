@@ -10,9 +10,5 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-app.get('/note:id', (req, res) => {
-    res.sendFile('public/index.html', {root: __dirname})
-});
-
 //API endpoints
 app.use(apiRoutes);
