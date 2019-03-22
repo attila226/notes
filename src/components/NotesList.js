@@ -44,19 +44,17 @@ class NoteList extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: note
-        }).then(response => {
-            response
-                .json()
-                .then(updatedNote => {
-                    this.setState({
-                        notes: [
-                            ...this.state.notes,
-                            updatedNote
-                        ]
-                    }, () => console.log('Added', updatedNote));
-                });
-        });
+                body: note
+            })
+            .then(response => response.json())
+            .then(updatedNote => {
+                this.setState({
+                    notes: [
+                        ...this.state.notes,
+                        updatedNote
+                    ]
+                }, () => console.log('Added', updatedNote));
+            });
     }
 
     titleStyle = {
