@@ -1,3 +1,5 @@
+import React from 'react';
+
 class Note extends React.Component {
     state = {
         title: (this.props.note)
@@ -119,3 +121,5 @@ class Note extends React.Component {
         );
     }
 }
+
+export default Note;

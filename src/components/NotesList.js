@@ -1,6 +1,14 @@
+import React from 'react';
+import Note from './Note';
+
 class NoteList extends React.Component {
     state = {
         notes: []
+    };
+
+    titleStyle = {
+        textAlign: 'center',
+        maring: '5px'
     };
 
     constructor(props) {
@@ -57,19 +65,6 @@ class NoteList extends React.Component {
             });
     }
 
-    titleStyle = {
-        textAlign: 'center',
-        maring: '5px'
-    }
-
-    buttonStyle = {
-        backgroundColor: '#4CAF50',
-        border: 'none',
-        color: 'white',
-        borderRadius: '12px',
-        fontSize: '16px'
-    };
-
     render() {
         return (
             <div>
@@ -87,3 +82,5 @@ class NoteList extends React.Component {
         );
     }
 }
+
+export default NoteList;

@@ -4,8 +4,11 @@
   "description": "Add, edit, and delete notes.",
   "main": "index.js",
   "scripts": {
-    "start": "npx babel --watch src --out-dir ./public --presets react-app/prod | node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "startServer": "node server.js",
+    "startDevClient": "webpack --mode development",
+    "start": "npm run startServer | npm run startDevClient",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production"
   },
   "keywords": [
     "node",
@@ -14,10 +17,20 @@
   "author": "Attila Buturla",
   "license": "ISC",
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-react-app": "^3.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
     "express": "^4.16.4",
     "lowdb": "^1.0.0",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
     "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "html-webpack-plugin": "^3.2.0"
   }
 }
