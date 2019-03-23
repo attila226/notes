@@ -24,7 +24,7 @@ This will run both the server and serve the website. The website utilizes webpac
 
 `src` Client side source files. By default running `npm run` will cause the JavaScript files in this directory to be transpiled and output to the `public` folder.
 
-`public` This folder is used exclusively by Webpack.
+`public` This folder is used exclusively by Webpack. The dev server will utilize this folder, and a build will copy the files to this directory.
 
 ### Additional Notes
 
