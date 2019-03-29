@@ -1,74 +1,71 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-class Note extends React.Component {
-    state = {
-        title: (this.props.note)
-            ? this.props.note.title
+const Note = (props) => {
+    const [note,
+        setNote] = useState({
+        title: (props.note)
+            ? props.note.title
             : '',
-        text: (this.props.note)
-            ? this.props.note.text
-            : '',
-        titleError: '',
-        noteError: ''
-    };
+        text: (props.note)
+            ? props.note.text
+            : ''
+    });
 
-    validate() {
+    const [errors,
+        setErrors] = useState({titleError: '', noteError: ''});
+
+    const validate = () => {
         let isValid = true;
         let titleError = '';
         let noteError = '';
 
-        if (!this.state.title) {
+        if (!note.title) {
             isValid = false;
             titleError = 'Title is required.';
         }
 
-        if (!this.state.text) {
+        if (!note.text) {
             isValid = false;
             noteError = 'Note text is required.';
         }
 
         if (titleError || noteError) {
-            this.setState({titleError, noteError});
+            setErrors({titleError, noteError});
             return false;
         }
 
         return isValid;
     }
 
-    handleSubmit = event => {
+    const handleSubmit = event => {
         event.preventDefault();
-        const id = (this.props.note)
-            ? this.props.note.id
+        const id = (props.note)
+            ? props.note.id
             : null;
 
-        const isValid = this.validate();
+        const isValid = validate();
 
         if (isValid) {
-            let note = {
-                title: this.state.title,
-                text: this.state.text
+            const isAdd = (!id);
+
+            props.save(JSON.stringify(note), id);
+
+            if (isAdd) {
+                //Clear out the note, since it's the "Add" note
+                setNote({title: '', text: ''});
             }
 
-            this
-                .props
-                .save(JSON.stringify(note), id);
-
-            if (!id) {
-                this.setState({title: '', text: '', titleError: '', noteError: ''});
-            } else {
-                this.setState({titleError: '', noteError: ''});
-            }
-
+            setErrors({titleError: '', noteError: ''});
         }
     };
 
-    handleChange = event => {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
+    const handleChange = event => {
+        note[event.target.name] = event.target.value;
+
+        setNote(note);
     };
 
-    buttonStyle = {
+    const buttonStyle = {
         backgroundColor: '#4CAF50',
         border: 'none',
         color: 'white',
@@ -77,49 +74,47 @@ class Note extends React.Component {
         width: '100px'
     };
 
-    textareaStyle = {
+    const textareaStyle = {
         width: '100%'
     };
 
-    errorStyle = {
+    const errorStyle = {
         fontSize: 12,
         color: 'red'
     };
 
-    gridContainer = {
+    const gridContainer = {
         display: 'grid',
         gridTemplateColumns: 'auto 70% auto',
         justifyContent: 'center',
         columnGap: '15px'
     }
 
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <div style={this.gridContainer}>
+    return (
+        <form onSubmit={handleSubmit}>
+            <div style={gridContainer}>
 
-                    <input name="title" value={this.state.title} onChange={this.handleChange}/>
+                <input name="title" value={note.title} onChange={handleChange}/>
 
-                    <textarea
-                        name="text"
-                        style={this.textareaStyle}
-                        value={this.state.text}
-                        onChange={this.handleChange}/>
+                <textarea
+                    name="text"
+                    style={textareaStyle}
+                    value={note.text}
+                    onChange={handleChange}/>
 
-                    <button type="submit" style={this.buttonStyle}>{this.props.buttonText}</button>
+                <button type="submit" style={buttonStyle}>{props.buttonText}</button>
 
-                    <div style={this.errorStyle}>
-                        {this.state.titleError}
-                    </div>
-
-                    <div style={this.errorStyle}>
-                        {this.state.noteError}
-                    </div>
-
+                <div style={errorStyle}>
+                    {errors.titleError}
                 </div>
-            </form>
-        );
-    }
+
+                <div style={errorStyle}>
+                    {errors.noteError}
+                </div>
+
+            </div>
+        </form>
+    );
 }
 
 export default Note;
