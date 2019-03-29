@@ -1,34 +1,29 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Note from './Note';
 
-class NoteList extends React.Component {
-    state = {
-        notes: []
-    };
+const NoteList = props => {
+    const [notes,
+        setNotes] = useState([]);
 
-    titleStyle = {
+    const titleStyle = {
         textAlign: 'center',
         maring: '5px'
     };
 
-    constructor(props) {
-        super(props);
+    useEffect(() => {
+        loadNotes();
+    });
 
-        this.addNote = this
-            .addNote
-            .bind(this);
-    }
-
-    componentDidMount() {
+    const loadNotes = () => {
         const url = "//localhost:8080/api/notes";
-        const response = fetch(url).then(response => {
+        fetch(url).then(response => {
             response
                 .json()
-                .then(notes => this.setState({notes}));
+                .then(notes => setNotes(notes));
         });
     }
 
-    updateNote(note, id) {
+    const updateNote = (note, id) => {
         const url = `//localhost:8080/api/notes/${id}`;
 
         fetch(url, {
@@ -43,7 +38,7 @@ class NoteList extends React.Component {
         });
     }
 
-    addNote(note) {
+    const addNote = (note) => {
         const url = `//localhost:8080/api/notes`;
 
         fetch(url, {
@@ -56,31 +51,19 @@ class NoteList extends React.Component {
             })
             .then(response => response.json())
             .then(updatedNote => {
-                this.setState({
-                    notes: [
-                        ...this.state.notes,
-                        updatedNote
-                    ]
-                }, () => console.log('Added', updatedNote));
+                setNotes([notes, updatedNote]);
             });
     }
 
-    render() {
-        return (
-            <div>
-                <h2 style={this.titleStyle}>Notes</h2>
-                {this
-                    .state
-                    .notes
-                    .map((note) => {
-                        return (<Note key={note.id} save={this.updateNote} note={note} buttonText="Update"/>);
-
-                    })}
-
-                <Note save={this.addNote} buttonText="Add"/>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <h2 style={titleStyle}>Notes</h2>
+            {notes.map((note) => {
+                return (<Note key={note.id} save={updateNote} note={note} buttonText="Update"/>);
+            })}
+            <Note save={addNote} buttonText="Add"/>
+        </div>
+    )
 }
 
 export default NoteList;
