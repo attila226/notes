@@ -16,11 +16,9 @@ const NoteList = props => {
 
     const loadNotes = () => {
         const url = "//localhost:8080/api/notes";
-        fetch(url).then(response => {
-            response
-                .json()
-                .then(notes => setNotes(notes));
-        });
+        fetch(url)
+            .then(response => response.json())
+            .then(notes => setNotes(notes));
     }
 
     const updateNote = (note, id) => {
