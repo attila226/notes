@@ -60,9 +60,10 @@ const Note = (props) => {
     };
 
     const handleChange = event => {
-        note[event.target.name] = event.target.value;
+        let updatedNote = {...note};
+        updatedNote[event.target.name] = event.target.value;
 
-        setNote(note);
+        setNote(updatedNote);
     };
 
     const buttonStyle = {

@@ -12,7 +12,7 @@ const NoteList = props => {
 
     useEffect(() => {
         loadNotes();
-    });
+    }, [JSON.stringify(notes)]);
 
     const loadNotes = () => {
         const url = "//localhost:8080/api/notes";
