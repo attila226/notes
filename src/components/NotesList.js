@@ -5,11 +5,6 @@ const NoteList = props => {
     const [notes,
         setNotes] = useState([]);
 
-    const titleStyle = {
-        textAlign: 'center',
-        maring: '5px'
-    };
-
     useEffect(() => {
         loadNotes();
     }, [JSON.stringify(notes)]);
@@ -55,7 +50,6 @@ const NoteList = props => {
 
     return (
         <div>
-            <h2 style={titleStyle}>Notes</h2>
             {notes.map((note) => {
                 return (<Note key={note.id} save={updateNote} note={note} buttonText="Update"/>);
             })}
