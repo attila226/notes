@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Nav from './Nav';
+import Note from './Note';
 
 const Layout1 = (props) => {
+    const [note,
+        updateNote] = useState({title: '', text: ''});
 
     const gridContainer = {
         display: 'grid',
@@ -11,19 +14,11 @@ const Layout1 = (props) => {
         gridTemplateAreas:`
         "header header header header header"
         "nav main main main main"
-        "footer footer footer footer footer"
         `
     }
     
     const headerArea = {
         gridArea: 'header',
-        textAlign: 'center',
-        padding: '5px 0',
-        backgroundColor: '#e5e5e5'
-    }
-
-    const footerArea = {
-        gridArea: 'footer',
         textAlign: 'center',
         padding: '5px 0',
         backgroundColor: '#e5e5e5'
@@ -38,12 +33,15 @@ const Layout1 = (props) => {
         gridArea: 'main'
     }
 
+    const loadNote = (newNote) =>{
+        updateNote(newNote);
+    }
+
     return (
         <div style={gridContainer}>
             <div style={headerArea}>HEADER</div>
-            <div style={navArea}><Nav notes={props.notes} /></div>
-            <div style={mainArea}>MAIN</div>
-            <div style={footerArea}>FOOTER</div>
+            <div style={navArea}><Nav loadNote={loadNote} notes={props.notes}/></div>
+            <div style={mainArea}><Note note={note} buttonText="Save" /></div>
         </div>
     );
 }

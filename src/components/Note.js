@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 const Note = (props) => {
-    const [note,
-        setNote] = useState({
+    const [note, setNote] = useState({
         title: (props.note)
             ? props.note.title
             : '',
@@ -13,6 +12,11 @@ const Note = (props) => {
 
     const [errors,
         setErrors] = useState({titleError: '', noteError: ''});
+
+    useEffect(() => {
+        console.log('note useEffect', props.note);
+        setNote(props.note);
+    });
 
     const validate = () => {
         let isValid = true;
